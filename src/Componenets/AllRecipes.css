@@ -1,0 +1,99 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Inter", serif;
+}
+.Header1{
+    height: 100px;
+    width: 1518px;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.Lower-Container button{
+    width: 96px;
+    height: 31px;
+    color: #ffff;
+    background-color: #ff0909;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+.body-allrecipes{
+  width: 1518px;
+  height: 500px;
+  background-color:azure;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 50px;
+  gap: 110px;
+}
+.upper-div img{
+  border-radius: 40px;
+}
+.lower-div{
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 70px;
+  align-items: center;
+}
+.lower-div button{
+  width: 220px;
+  height: 50px;
+  background-color: orange;
+  font-weight: bold;
+  font-size: 14px;
+  border: none;
+  border-radius: 30px;
+}
+.recipes-cards-container{
+  height: 500px;
+  width: 1518px;
+  display: grid;
+  grid-template-columns: repeat(4, 310px);
+  grid-template-rows: auto;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+  /* background-color: azure; */
+}
+.recipe-card-1{
+  margin-top: 30px;
+  height: 560px;
+  background-color:aliceblue;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+  padding: 25px;
+  gap: 10px;
+  border-radius: 15px;
+}
+.ratings{
+  background-color: #ff0909;
+  border-radius: 5px;
+  height: 25px;
+  width: 35px;
+  padding: 4px;
+  margin-left: 200px;
+  color: #ffff;
+}
+.mealtype{
+  background-color: rgb(108, 201, 108);
+  color: black;
+  width: fit-content;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* padding: 3px; */
+  font-weight: bold;
+}
