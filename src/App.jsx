@@ -2,14 +2,16 @@ import { createContext, useEffect, useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useParams } from "react-router-dom";
 import Home from "./Componenets/Home";
-import AllRecipes from "./Componenets/AllRecipes";
+import RecipesWebsite from "./Componenets/RecipesWebsite";
 
 export const provideStateContext = createContext();
 
 function App() {
   const [recipes, setRecipes] = useState([]);
+
+
   async function handleApiCall() {
     try {
       const request = await fetch("https://dummyjson.com/recipes");
@@ -27,9 +29,9 @@ function App() {
     <>
       <provideStateContext.Provider value={recipes}>
         <Routes>
-          <Route path="all-recipes" element={<AllRecipes />} />
           <Route path="/" element={<Home />} />
-        </Routes>
+          <Route path="/recipes-details/:id" element={<RecipesWebsite />} />
+          </Routes>
       </provideStateContext.Provider>
     </>
   );

@@ -1,0 +1,224 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+.Header1 {
+  /* border: 2px solid black; */
+  width: 1518px;
+  height: 100px;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+  position: relative;
+}
+.upper-container {
+  width: 1200px;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+}
+.upper-container input {
+  width: 285px;
+  height: 40px;
+  border-radius: 5px;
+  border: 1px solid #ff0909;
+  background-color: black;
+  font-family: "Inter", serif;
+  font-weight: 400;
+  font-size: 16px;
+  padding-left: 10px;
+  color: #ffff;
+}
+.upper-container input::placeholder {
+  color: #ffff;
+}
+.down-container {
+  height: 31px;
+  display: flex;
+  gap: 14px;
+  position: absolute;
+  top: 100px;
+}
+
+.Lower-Container button {
+   width: '12dvw';
+   height: '100%'; 
+   color: #ffff;
+  background-color: #ff0909;
+  border-radius: '1dvw';
+  font-size: '1rem';
+  cursor: pointer;
+  padding-inline: '0.5rem'; 
+}
+.getRecipes-body {
+ 
+  height: 155vh;
+  width: 1518px;
+  border: 1px solid black;
+}
+.upper-part-body {
+  height: 500px;
+  width: 1518px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: azure;
+  gap: 50px;
+  
+}
+.upper-part-body p{
+  font-size: larger;
+  text-align: center;
+  margin-left: 50px;
+}
+.div h1 {
+  background-color: yellow;
+  color: red;
+}
+.upper-part-body img {
+  height: 50vh;
+  width: 700px;
+  border: 1px solid black;
+  border-radius: 20px;
+}
+.upper-part-body div {
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+.lower-part-body {
+  background-color: azure;
+  height: 80vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap:40px;
+}
+.left-part {
+  /* background-color: bisque; */
+  height: 80vh;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  font-size: larger;
+  padding-left: 50px;
+}
+
+.left-part h1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffff ;
+  border: 2px solid black;
+  width: max-content;
+  height: 10vh;
+  margin-left: 180px;
+  border-radius: 10px;
+  padding: 10px;
+}
+.left-part .tags {
+  background-color: lightgray;
+  display: flex;
+  justify-content: space-around;
+  border: 1px solid black;
+  height: 18vh;
+  padding: 15px 40px;
+  align-items: center;
+  font-size: larger;
+  border-radius: 20px;
+  width: 46vw;
+  gap: 20px;
+}
+.tags div{
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.tags ul{
+  display: flex;
+  gap: 30px;
+}
+.left-part .timers {
+  background-color: lightgrey;
+  border: 1px solid black;
+  height: 18vh;
+  padding: 15px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+}
+.timers ol{
+  display: flex;
+  gap:70px;
+  font-size: larger;
+  align-items: center;
+}
+.left-part .getallDetails {
+  height: 18vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.getallDetails p {
+  width: fit-content;
+  font-weight: bold;
+  border: 1px solid black;
+  height: 50px;
+  width: 150px;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ff0909;
+  color: white;
+}
+.right-part {
+  height: 80vh;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 50px;
+  font-size: larger;
+  gap: 10px;
+}
+.right-part .ingredeints {
+  border: 1px solid black;
+  height: 35vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 10px 50px;
+  width: 40vw;
+  background-color: lightgrey;
+  border-radius: 10px;
+  height: max-content;
+}
+.right-part .Instructions {
+  border: 1px solid black;
+  height: max-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  /* gap: 10px; */
+  padding: 10px 50px;
+  width: 40vw;
+  background-color: lightgrey;
+  border-radius: 10px;
+}
+.Instructions ol {
+  padding-left: 17px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}

@@ -1,13 +1,30 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import "./Home.css";
-import { Link, useNavigate } from "react-router-dom";
 import { provideStateContext } from "../App";
+import { Link } from "react-router-dom";
 const Home = () => {
   const recipes = useContext(provideStateContext);
-  const navigate = useNavigate();
+  const button = [
+    "All",
+    "Lunch",
+    "Breakfast",
+    "Dinner",
+    "Dessert",
+    "Beverage",
+    "Side Dish",
+  ];
 
-  function routeToAll() {
-    navigate("all-recipes");
+  const [mealTypeSet, setMealType] = useState(button[0]);
+  const [input, setInputValue] = useState("");
+  const [filterArray, setDataFilter] = useState([]);
+
+  function handleChange(value) {
+    setInputValue(value);
+    let filterData = recipes?.filter(
+      (item) => value && item?.name?.toLowerCase().includes(value.toLowerCase())
+    );
+    setDataFilter(filterData);
+    console.log(filterArray);
   }
 
   return (
@@ -38,32 +55,90 @@ const Home = () => {
               </svg>
             </p>
 
-            <input
-              type="text"
-              placeholder="Search food....."
-              className="input-box"
-            />
+            <div>
+              <input
+                type="text"
+                placeholder="Search food....."
+                className="input-box"
+                onChange={(e) => {
+                  handleChange(e.target.value);
+                }}
+              />
+              <div style={{
+                height:"6dvh",
+                overflowY : "auto",
+                display:"flex",
+                flexDirection :"column",
+              }}>
+                {filterArray
+                  .filter((item) =>
+                    item?.name?.toLowerCase().includes(input.toLowerCase())
+                  )
+                  .map((item) => (
+                    <Link key={item.name} style={{ backgroundColor: "white", zIndex:"2" }} to={`/recipes-details/${item.id}`}>
+                      {item.name}
+                    </Link>
+                  ))}
+              </div>
+            </div>
           </div>
-          <div className="down-container">
-            <button
-              onClick={() => {
-                routeToAll();
-              }}
-            >
-              All
-            </button>
-            <button>Breakfast</button>
-            <button>Lunch</button>
-            <button>Dinner</button>
+
+          <div className="down-container" style={{top: "125px"}}>
+            {button.map((item) => {
+              return (
+                <button
+                  style={{
+                    backgroundColor: "#ff0909",
+                    width: "12dvw",
+                    borderRadius: "0.3rem",
+                  }}
+                  onClick={() => setMealType(item)}
+                >
+                  {item}
+                </button>
+              );
+            })}
           </div>
         </div>
+        <ShowData mealType={mealTypeSet} />
+      </div>
+    </>
+  );
+};
 
-        {/** Body section is started */}
-        <div className="body">
-          <div className="card-container">
-            {recipes.splice(0, 9).map((recipe) => {
+{
+  /** Show data component is write here  */
+}
+export function ShowData({ mealType }) {
+  const recipes = useContext(provideStateContext);
+  return (
+    <>
+      {
+        <div
+          className="body"
+          style={{
+            padding: "1rem",
+          }}
+        >
+          <div
+            className="card-container"
+            style={{
+              overflowY: "scroll",
+              overflowX: "hidden",
+              height: "77dvh",
+              width: "110dvw",
+            }}
+          >
+            {(mealType === "" || mealType === "All"
+              ? recipes
+              : recipes?.filter((item) => item?.mealType?.includes(mealType))
+            )?.map((recipe) => {
               return (
-                <div className="card-1" key={recipe.id}>
+                <Link
+                  className="card-1"
+                  key={recipe.id}
+                  to={`/recipes-details/${recipe.id}`}
+                >
                   <div className="upper-part">
                     <img
                       src={recipe.image}
@@ -76,16 +151,20 @@ const Home = () => {
                     </div>
                   </div>
                   <div className="lower-part">
+                    {recipe.mealType?.map((item) => {
+                      return <button id="mealType">{`${item}`}</button>;
+                    })}
+
                     <button>{`$${recipe.caloriesPerServing}`}</button>
                   </div>
-                </div>
+                </Link>
               );
             })}
           </div>
         </div>
-      </div>
+      }
     </>
   );
-};
+}
 
 export default Home;

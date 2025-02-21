@@ -1,13 +1,28 @@
-import React, { useContext } from "react";
-import "./AllRecipes.css";
-import { useNavigate } from "react-router-dom";
-import recipe_image from "../assets/image.png";
-import { provideStateContext } from "../App";
-const AllRecipes = () => {
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import "./RecipesWebsite.css";
+
+const RecipesWebsite = () => {
+  const { id } = useParams();
   const navigate = useNavigate();
 
-const recipes = useContext(provideStateContext);
-  function goToHome() {
+  const [givenRecipe, setGivenRecipe] = useState({});
+
+  async function getTheRecipe() {
+    try {
+      const request = await fetch(`https://dummyjson.com/recipes/${id}`);
+      const response = await request.json();
+      setGivenRecipe(response);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  useEffect(() => {
+    getTheRecipe();
+  }, [id]);
+
+  function goToBack() {
     navigate("/");
   }
   return (
@@ -40,10 +55,15 @@ const recipes = useContext(provideStateContext);
           <div className="Lower-Container">
             <button
               onClick={() => {
-                goToHome();
+                goToBack();
+              }}
+              style={{
+                width :"10dvw",
+                height:"5dvh",
+                borderRadius :"0.325rem"
               }}
             >
-              Home
+              Back
             </button>
           </div>
 
@@ -55,51 +75,98 @@ const recipes = useContext(provideStateContext);
         </div>
       </div>
 
-      {/* started with body part */}
-      <div className="body-allrecipes">
-        <div className="upper-div">
-          <img
-            src={recipe_image}
-            alt="recipe"
-            style={{ height: "450px", width: "700px" }}
-          />
-        </div>
-        <div className="lower-div">
-          <h1>
-            Welcome to Top trips food where the food changes with the seasons
-          </h1>
-          <p>
-            A popular restaurant in your nearby places. We prepares and serves
-            quality food and drinks to our customers
-          </p>
-          <button>Lets start with the Manu</button>
-        </div>
-      </div>
+      {/** Started with the body section  */}
 
-      {/* Started with the all recipes card cestion*/}
-      <div className="recipes-cards-container">
-        {
-            recipes.map((recipe)=>{
-                return (
-                    <div className="recipe-card-1" key={recipe.id}>
-                    <img
-                      src={recipe.image}
-                      alt="recipe-imag"
-                      style={{ height: "260px", width: "250px" }}
-                    />
-                    <h3>{recipe.name}</h3>
-                    <h4>{recipe.cuisine}</h4>
-                    <p className="mealtype">{recipe.mealType}</p>
-                    <p>{recipe.ingredients}</p>
-                    <p className="ratings">{recipe.rating}</p>
-                  </div>
-                );
-            })
-        }
-       
+      <div className="getRecipes-body">
+        <div className="upper-part-body">
+          <img src={givenRecipe.image} alt="recipe-image" />
+          <div className="div">
+            <h1>{givenRecipe.name}</h1>
+            <h2>
+              The delicious dish with the lots of love and feels happy to test
+              this meal.
+            </h2>
+            <p>
+              "Good food is the foundation of happiness and health, A taste of
+              love in every bite, a moment of wealth. Flavors tell stories,
+              traditions unfold, In every dish, a memory is told."
+            </p>
+          </div>
+        </div>
+
+        <div className="lower-part-body">
+          <div className="left-part">
+            <h1>Meal Type : {givenRecipe.mealType}</h1>
+
+            <div className="tags">
+              <div>
+                <span>
+                  <strong>Tags:</strong>
+                </span>
+
+                {givenRecipe?.tags?.length > 0 && (
+                  <ul>
+                    {givenRecipe.tags.map((element, index) => {
+                      return (
+                        <>
+                          <li key={index}>{element}</li>
+                        </>
+                      );
+                    })}
+                  </ul>
+                )}
+              </div>
+
+              <p>
+                <strong>Cuisine</strong> : {givenRecipe.cuisine}
+              </p>
+            </div>
+
+            <div className="timers">
+              <ol>
+                <strong>Times :</strong>
+
+                <li>{`Preparing Time : ${givenRecipe.prepTimeMinutes}`}</li>
+                <li>{`Cooking Time : ${givenRecipe.cookTimeMinutes}`}</li>
+              </ol>
+            </div>
+
+            <div className="getallDetails">
+              <p>{`Servings : ${givenRecipe.servings} `}</p>
+
+              <p>{`Calories : ${givenRecipe.caloriesPerServing}`}</p>
+              <p>{`Ratings : ${givenRecipe.rating}`}</p>
+              <p>{`Reveiw : ${givenRecipe.reviewCount}`}</p>
+            </div>
+          </div>
+
+          <div className="right-part">
+            <div className="ingredeints">
+              <h2>Ingredeints </h2>
+              {givenRecipe?.ingredients?.length > 0 && (
+                <ol>
+                  {givenRecipe.ingredients.map((element) => {
+                    return <li>{element}</li>;
+                  })}
+                </ol>
+              )}
+            </div>
+
+            <div className="Instructions">
+              <h2>Instructions</h2>
+              {givenRecipe?.instructions?.length > 0 && (
+                <ol>
+                  {givenRecipe.instructions.map((element, index) => (
+                    <li key={index}>{`${element}`}</li>
+                  ))}
+                </ol>
+              )}
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );
 };
 
-export default AllRecipes;
+export default RecipesWebsite;
